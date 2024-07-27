@@ -1,16 +1,15 @@
-package org.example.currencyExchanger.servlets;
+package org.example.currencyexchanger.servlets;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import org.example.currencyExchanger.exception.DataAccessException;
-import org.example.currencyExchanger.exception.ErrorResponse;
-import org.example.currencyExchanger.model.ExchangeRates;
-import org.example.currencyExchanger.service.AnswersErrors;
-import org.example.currencyExchanger.service.CurrencyExchangeService;
-import org.example.currencyExchanger.service.CurrencyService;
-import org.example.currencyExchanger.service.JsonConverter;
+import org.example.currencyexchanger.exception.DataAccessException;
+import org.example.currencyexchanger.model.ExchangeRates;
+import org.example.currencyexchanger.service.AnswersErrors;
+import org.example.currencyexchanger.service.CurrencyExchangeService;
+import org.example.currencyexchanger.service.CurrencyService;
+import org.example.currencyexchanger.service.JsonConverter;
 
 import java.io.IOException;
 import java.io.PrintWriter;

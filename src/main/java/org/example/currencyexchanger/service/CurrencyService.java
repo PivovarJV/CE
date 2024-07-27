@@ -1,10 +1,10 @@
-package org.example.currencyExchanger.service;
+package org.example.currencyexchanger.service;
 
-import org.example.currencyExchanger.dao.CurrencyDAO;
-import org.example.currencyExchanger.dao.ExchangeRatesDAO;
-import org.example.currencyExchanger.exception.DuplicateCurrencyCodeException;
-import org.example.currencyExchanger.model.Currency;
-import org.example.currencyExchanger.model.ExchangeRates;
+import org.example.currencyexchanger.dao.CurrencyDAO;
+import org.example.currencyexchanger.dao.ExchangeRatesDAO;
+import org.example.currencyexchanger.exception.DuplicateCurrencyCodeException;
+import org.example.currencyexchanger.model.Currency;
+import org.example.currencyexchanger.model.ExchangeRates;
 
 import java.math.BigDecimal;
 import java.util.List;

@@ -1,5 +1,6 @@
-package org.example.currencyExchanger.service;
+package org.example.currencyexchanger.servlets;
 
+import jakarta.servlet.Filter;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebFilter;
@@ -10,11 +11,12 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @WebFilter("/*")
-public class Filter extends HttpFilter implements jakarta.servlet.Filter {
+public class CORSFilter extends HttpFilter {
     @Override
     protected void doFilter(HttpServletRequest req, HttpServletResponse res, FilterChain chain) throws IOException, ServletException {
-        res.setContentType("application/json");
-        res.setCharacterEncoding("UTF-8");
+        res.setHeader("Access-Control-Allow-Origin", "*");
+        res.setHeader("Access-Control-Allow-Methods", "GET, POST, PATCH");
+        res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
         chain.doFilter(req, res);
     }
 }

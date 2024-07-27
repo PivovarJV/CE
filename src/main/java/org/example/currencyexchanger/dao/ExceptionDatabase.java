@@ -1,4 +1,4 @@
-package org.example.currencyExchanger.dao;
+package org.example.currencyexchanger.dao;
 
 public class ExceptionDatabase extends RuntimeException{
     public ExceptionDatabase(String message){

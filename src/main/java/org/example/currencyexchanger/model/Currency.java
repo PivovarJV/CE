@@ -1,4 +1,4 @@
-package org.example.currencyExchanger.model;
+package org.example.currencyexchanger.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

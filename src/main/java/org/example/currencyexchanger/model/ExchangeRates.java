@@ -1,18 +1,15 @@
-package org.example.currencyExchanger.dto;
+package org.example.currencyexchanger.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import org.example.currencyExchanger.model.Currency;
 
 import java.math.BigDecimal;
 
-
 @Data
 @AllArgsConstructor
-public class CurrencyExchangeDTO {
+public class ExchangeRates {
+    private int id;
     private Currency baseCurrency;
     private Currency targetCurrency;
     private BigDecimal rate;
-    private BigDecimal amount;
-    private BigDecimal convertedAmount;
 }
