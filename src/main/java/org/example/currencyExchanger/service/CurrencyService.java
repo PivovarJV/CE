@@ -2,6 +2,7 @@ package org.example.currencyExchanger.service;
 
 import org.example.currencyExchanger.dao.CurrencyDAO;
 import org.example.currencyExchanger.dao.ExchangeRatesDAO;
+import org.example.currencyExchanger.exception.DuplicateCurrencyCodeException;
 import org.example.currencyExchanger.model.Currency;
 import org.example.currencyExchanger.model.ExchangeRates;
 
@@ -28,7 +29,7 @@ public class CurrencyService {
         return exchangeRatesDAO.getExchangeRate(baseCode, targetCode);
     }
 
-    public Currency addCurrency(String nameCurrency, String codeCurrency, String singCurrency) {
+    public Currency addCurrency(String nameCurrency, String codeCurrency, String singCurrency) throws DuplicateCurrencyCodeException {
         return currencyDAO.addCurrency(nameCurrency, codeCurrency, singCurrency);
     }
 

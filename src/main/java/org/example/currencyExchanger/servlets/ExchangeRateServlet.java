@@ -4,6 +4,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.example.currencyExchanger.exception.DataAccessException;
 import org.example.currencyExchanger.exception.ErrorResponse;
 import org.example.currencyExchanger.model.ExchangeRates;
 import org.example.currencyExchanger.service.AnswersErrors;
@@ -60,7 +61,7 @@ public class ExchangeRateServlet extends PatchServlet {
             ExchangeRates exchangeRates = currencyService.getExchangeRates(baseCode, targetCode);
             resp.getWriter().print(JsonConverter.transformation(exchangeRates));
 
-        } catch (Exception e) {
+        } catch (DataAccessException e) {
             AnswersErrors.errorResponse(resp, HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Ошибка :(");
         }
     }
@@ -83,7 +84,7 @@ public class ExchangeRateServlet extends PatchServlet {
 
             PrintWriter pw = resp.getWriter();
             pw.print(JsonConverter.transformation(exchangeRates));
-        } catch (Exception e) {
+        } catch (DataAccessException e) {
             AnswersErrors.errorResponse(resp, HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Ошибка :(");
         }
     }

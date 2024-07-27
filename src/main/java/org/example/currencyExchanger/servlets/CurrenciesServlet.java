@@ -6,6 +6,8 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.example.currencyExchanger.dao.ExceptionDatabase;
+import org.example.currencyExchanger.exception.DataAccessException;
+import org.example.currencyExchanger.exception.DuplicateCurrencyCodeException;
 import org.example.currencyExchanger.exception.ErrorResponse;
 import org.example.currencyExchanger.model.Currency;
 import org.example.currencyExchanger.service.AnswersErrors;
@@ -14,6 +16,8 @@ import org.example.currencyExchanger.service.JsonConverter;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.List;
 
 @WebServlet("/currencies")
@@ -22,25 +26,29 @@ public class CurrenciesServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        try {
-            String nameCurrency = req.getParameter("name");
-            String codeCurrency = req.getParameter("code");
-            String singCurrency = req.getParameter("sign");
+        String nameCurrency = req.getParameter("name");
+        String codeCurrency = req.getParameter("code");
+        String singCurrency = req.getParameter("sign");
 
-            if (nameCurrency.trim().isEmpty() || codeCurrency.trim().isEmpty() || singCurrency.trim().isEmpty()) {
-                AnswersErrors.errorResponse(resp, HttpServletResponse.SC_BAD_REQUEST, "Отсутствует нужное поле формы");
-                return;
-            }
+        if (nameCurrency.trim().isEmpty() || codeCurrency.trim().isEmpty() || singCurrency.trim().isEmpty()) {
+            AnswersErrors.errorResponse(resp, HttpServletResponse.SC_BAD_REQUEST, "Отсутствует нужное поле формы");
+            return;
+        }
+
+        if (codeCurrency.length() != 3) {
+            AnswersErrors.errorResponse(resp, HttpServletResponse.SC_BAD_REQUEST, "CODE валюты должен содержать 3 символа");
+            return;
+        }
+
+        try {
             Currency currency = currencyService.addCurrency(nameCurrency, codeCurrency, singCurrency);
             resp.getWriter().print(JsonConverter.transformation(currency));
 
-        } catch (ExceptionDatabase e) {
-            if (e.getMessage().contains("существует")) {
-                resp.setStatus(HttpServletResponse.SC_CONFLICT);
-            }
-            ErrorResponse errorResponse = new ErrorResponse(e.getMessage());
-            resp.getWriter().print(JsonConverter.transformation(errorResponse));
-        } catch (Exception e) {
+        } catch (DuplicateCurrencyCodeException e) {
+            AnswersErrors.errorResponse(resp, HttpServletResponse.SC_CONFLICT, "Валютная пара с таким кодом уже существует");
+        } catch (NullPointerException e) {
+            AnswersErrors.errorResponse(resp, HttpServletResponse.SC_BAD_REQUEST, "Не удалось добавить валюту в БД");
+        } catch (DataAccessException e) {
             AnswersErrors.errorResponse(resp, HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Ошибка при добавлении валюты");
         }
     }
@@ -49,7 +57,7 @@ public class CurrenciesServlet extends HttpServlet {
         try {
             List<Currency> currencies = currencyService.getAllCurrencies();
             response.getWriter().print(JsonConverter.transformation(currencies));
-        } catch (Exception e) {
+        } catch (DataAccessException e) {
             AnswersErrors.errorResponse(response, HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Ошибка :(");
         }
     }

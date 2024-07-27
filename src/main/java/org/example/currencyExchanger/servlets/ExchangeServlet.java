@@ -9,6 +9,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import org.example.currencyExchanger.dto.CurrencyExchangeDTO;
 import org.example.currencyExchanger.exception.CurrencyExchangeException;
 import org.example.currencyExchanger.exception.CurrencyNotFoundException;
+import org.example.currencyExchanger.exception.DataAccessException;
 import org.example.currencyExchanger.exception.ErrorResponse;
 import org.example.currencyExchanger.service.AnswersErrors;
 import org.example.currencyExchanger.service.CurrencyExchangeService;
@@ -52,7 +53,7 @@ public class ExchangeServlet extends HttpServlet {
             AnswersErrors.errorResponse(resp, HttpServletResponse.SC_NOT_FOUND, "Одна (или обе) валюты не существует в БД");
         } catch (CurrencyExchangeException e) {
             AnswersErrors.errorResponse(resp, HttpServletResponse.SC_BAD_REQUEST, "Обмен не возможен. Нет прямого/обратного/кроcс курса");
-        } catch (Exception e) {
+        } catch (DataAccessException e) {
             AnswersErrors.errorResponse(resp, HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Ошибка :(");
         }
     }

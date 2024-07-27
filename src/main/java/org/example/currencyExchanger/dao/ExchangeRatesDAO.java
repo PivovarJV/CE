@@ -1,5 +1,6 @@
 package org.example.currencyExchanger.dao;
 
+import org.example.currencyExchanger.exception.DataAccessException;
 import org.example.currencyExchanger.model.Currency;
 import org.example.currencyExchanger.model.ExchangeRates;
 import org.example.currencyExchanger.service.DataSource;
@@ -46,7 +47,7 @@ public class ExchangeRatesDAO {
                 exchangeRates.add(exchangeRate);
             }
         } catch (SQLException e) {
-            throw new ExceptionDatabase("Невозможно получить курсы валют из базы данных", e);
+            throw new DataAccessException();
         }
         return exchangeRates;
     }
@@ -90,8 +91,7 @@ public class ExchangeRatesDAO {
             preparedStatement.close();
             rs.close();
         } catch (SQLException e) {
-            //throw new ExceptionDatabase("Невозможно получить курс валют из базы данных", e);
-            throw new RuntimeException(e);
+            throw new DataAccessException();
         }
         return exchangeRate;
     }
@@ -112,7 +112,7 @@ public class ExchangeRatesDAO {
             connect.close();
             preparedStatement.close();
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new DataAccessException();
         }
     }
 
@@ -126,14 +126,12 @@ public class ExchangeRatesDAO {
             preparedStatement.setBigDecimal(1, rate);
             preparedStatement.setInt(2, baseId);
             preparedStatement.setInt(3, targetId);
-            int affectedRows = preparedStatement.executeUpdate();
-            if (affectedRows == 0) {
-                throw new SQLException("Курс не был изменен");
-            }
+            preparedStatement.executeUpdate();
+
             connect.close();
             preparedStatement.close();
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new DataAccessException();
         }
     }
 
@@ -155,7 +153,7 @@ public class ExchangeRatesDAO {
             preparedStatement.close();
             rs.close();
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new DataAccessException();
         }
         return rate;
     }

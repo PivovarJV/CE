@@ -5,6 +5,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.example.currencyExchanger.exception.DataAccessException;
 import org.example.currencyExchanger.exception.ErrorResponse;
 import org.example.currencyExchanger.model.ExchangeRates;
 import org.example.currencyExchanger.service.AnswersErrors;
@@ -40,16 +41,14 @@ public class ExchangeRatesServlet extends HttpServlet {
                 AnswersErrors.errorResponse(resp, HttpServletResponse.SC_NOT_FOUND, "Одна (или обе) валюта из валютной пары не существует в БД");
                 return;
             }
-
             if (currencyService.getExchangeRates(baseCurrency, targetCurrency) != null) {
                 AnswersErrors.errorResponse(resp, HttpServletResponse.SC_CONFLICT, "Валютная пара с таким кодом уже существует");
                 return;
             }
-
             currencyService.addExchangeRates(idBaseCurrency, idTargetCurrency, rateDecimal);
             ExchangeRates exchangeRates = currencyService.getExchangeRates(baseCurrency, targetCurrency);
             resp.getWriter().print(JsonConverter.transformation(exchangeRates));
-        } catch (Exception e) {
+        } catch (DataAccessException e) {
             AnswersErrors.errorResponse(resp, HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Ошибка при добавлении валютного курса");
         }
     }
@@ -58,7 +57,7 @@ public class ExchangeRatesServlet extends HttpServlet {
         try {
             List<ExchangeRates> exchangeRatesList = currencyService.getAllExchangeRates();
             response.getWriter().print(JsonConverter.transformation(exchangeRatesList));
-        } catch (Exception e) {
+        } catch (DataAccessException e) {
             AnswersErrors.errorResponse(response, HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Ошибка :(");
         }
     }

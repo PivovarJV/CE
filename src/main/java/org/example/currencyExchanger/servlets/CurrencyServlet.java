@@ -5,6 +5,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.example.currencyExchanger.exception.DataAccessException;
 import org.example.currencyExchanger.exception.ErrorResponse;
 import org.example.currencyExchanger.model.Currency;
 import org.example.currencyExchanger.service.AnswersErrors;
@@ -33,7 +34,7 @@ public class CurrencyServlet extends HttpServlet {
                 return;
             }
             resp.getWriter().print(JsonConverter.transformation(currency));
-        } catch (Exception e) {
+        } catch (DataAccessException e) {
             AnswersErrors.errorResponse(resp, HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Ошибка :(");
         }
     }

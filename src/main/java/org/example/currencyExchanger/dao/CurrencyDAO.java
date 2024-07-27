@@ -1,5 +1,7 @@
 package org.example.currencyExchanger.dao;
 
+import org.example.currencyExchanger.exception.DataAccessException;
+import org.example.currencyExchanger.exception.DuplicateCurrencyCodeException;
 import org.example.currencyExchanger.model.Currency;
 import org.example.currencyExchanger.service.DataSource;
 
@@ -23,7 +25,7 @@ public class CurrencyDAO {
                 currencies.add(new Currency(id, code, name, sing));
             }
         } catch (SQLException e) {
-            throw new ExceptionDatabase("Невозможно получить валюты из базы данных", e);
+            throw new DataAccessException();
         }
         return currencies;
     }
@@ -47,12 +49,12 @@ public class CurrencyDAO {
             preparedStatement.close();
             rs.close();
         } catch (SQLException e) {
-            throw new ExceptionDatabase("Валюта не найдена", e);
+            throw new DataAccessException();
         }
         return currency;
     }
 
-    public Currency addCurrency(String nameCurrency, String codeCurrency, String singCurrency) {
+    public Currency addCurrency(String nameCurrency, String codeCurrency, String singCurrency) throws DuplicateCurrencyCodeException {
         Currency currency = null;
         try {
             Connection connect = DataSource.getConnection();
@@ -62,10 +64,8 @@ public class CurrencyDAO {
             preparedStatement.setString(1, codeCurrency);
             preparedStatement.setString(2, nameCurrency);
             preparedStatement.setString(3, singCurrency);
-            int affectedRows = preparedStatement.executeUpdate();
-            if (affectedRows == 0) {
-                throw new SQLException("Валюта не была добавлена");
-            }
+            preparedStatement.executeUpdate();
+
             ResultSet rs = preparedStatement.getGeneratedKeys();
             if (rs.next()) {
                 int id = rs.getInt(1);
@@ -76,7 +76,9 @@ public class CurrencyDAO {
             rs.close();
         } catch (SQLException e) {
             if (e.getErrorCode() == 19) {
-                throw new ExceptionDatabase("Валюта с таким кодом уже существует", e);
+                throw new DuplicateCurrencyCodeException();
+            } else {
+                throw new DataAccessException();
             }
         }
         return currency;
@@ -97,7 +99,7 @@ public class CurrencyDAO {
             preparedStatement.close();
             rs.close();
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new DataAccessException();
         }
         return id;
     }
