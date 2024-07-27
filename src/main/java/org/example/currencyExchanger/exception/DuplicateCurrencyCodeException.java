@@ -1,4 +1,4 @@
-package org.example.currencyexchanger.exception;
+package org.example.currencyExchanger.exception;
 
 public class DuplicateCurrencyCodeException extends Exception {
     public DuplicateCurrencyCodeException() {

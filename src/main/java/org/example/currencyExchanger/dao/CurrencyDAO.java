@@ -1,9 +1,9 @@
-package org.example.currencyexchanger.dao;
+package org.example.currencyExchanger.dao;
 
-import org.example.currencyexchanger.exception.DataAccessException;
-import org.example.currencyexchanger.exception.DuplicateCurrencyCodeException;
-import org.example.currencyexchanger.model.Currency;
-import org.example.currencyexchanger.service.DataSource;
+import org.example.currencyExchanger.exception.DataAccessException;
+import org.example.currencyExchanger.exception.DuplicateCurrencyCodeException;
+import org.example.currencyExchanger.model.Currency;
+import org.example.currencyExchanger.service.DataSource;
 
 import java.sql.*;
 import java.util.ArrayList;

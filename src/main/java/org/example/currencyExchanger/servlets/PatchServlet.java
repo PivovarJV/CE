@@ -1,4 +1,4 @@
-package org.example.currencyexchanger.servlets;
+package org.example.currencyExchanger.servlets;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;

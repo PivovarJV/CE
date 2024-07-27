@@ -1,17 +1,17 @@
-package org.example.currencyexchanger.servlets;
+package org.example.currencyExchanger.servlets;
 
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import org.example.currencyexchanger.dto.CurrencyExchangeDTO;
-import org.example.currencyexchanger.exception.CurrencyExchangeException;
-import org.example.currencyexchanger.exception.CurrencyNotFoundException;
-import org.example.currencyexchanger.exception.DataAccessException;
-import org.example.currencyexchanger.service.AnswersErrors;
-import org.example.currencyexchanger.service.CurrencyExchangeService;
-import org.example.currencyexchanger.service.CurrencyService;
-import org.example.currencyexchanger.service.JsonConverter;
+import org.example.currencyExchanger.dto.CurrencyExchangeDTO;
+import org.example.currencyExchanger.exception.CurrencyExchangeException;
+import org.example.currencyExchanger.exception.CurrencyNotFoundException;
+import org.example.currencyExchanger.exception.DataAccessException;
+import org.example.currencyExchanger.service.AnswersErrors;
+import org.example.currencyExchanger.service.CurrencyExchangeService;
+import org.example.currencyExchanger.service.CurrencyService;
+import org.example.currencyExchanger.service.JsonConverter;
 
 import java.io.IOException;
 import java.math.BigDecimal;

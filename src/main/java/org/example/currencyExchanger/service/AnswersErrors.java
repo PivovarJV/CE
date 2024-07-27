@@ -1,7 +1,7 @@
-package org.example.currencyexchanger.service;
+package org.example.currencyExchanger.service;
 
 import jakarta.servlet.http.HttpServletResponse;
-import org.example.currencyexchanger.exception.ErrorResponse;
+import org.example.currencyExchanger.exception.ErrorResponse;
 
 import java.io.IOException;
 

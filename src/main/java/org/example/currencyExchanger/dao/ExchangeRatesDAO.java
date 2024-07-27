@@ -1,9 +1,9 @@
-package org.example.currencyexchanger.dao;
+package org.example.currencyExchanger.dao;
 
-import org.example.currencyexchanger.exception.DataAccessException;
-import org.example.currencyexchanger.model.Currency;
-import org.example.currencyexchanger.model.ExchangeRates;
-import org.example.currencyexchanger.service.DataSource;
+import org.example.currencyExchanger.exception.DataAccessException;
+import org.example.currencyExchanger.model.Currency;
+import org.example.currencyExchanger.model.ExchangeRates;
+import org.example.currencyExchanger.service.DataSource;
 
 import java.math.BigDecimal;
 import java.sql.*;

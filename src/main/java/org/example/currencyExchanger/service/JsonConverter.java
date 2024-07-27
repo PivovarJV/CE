@@ -1,11 +1,11 @@
-package org.example.currencyexchanger.service;
+package org.example.currencyExchanger.service;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import org.example.currencyexchanger.dto.CurrencyExchangeDTO;
-import org.example.currencyexchanger.exception.ErrorResponse;
-import org.example.currencyexchanger.model.Currency;
-import org.example.currencyexchanger.model.ExchangeRates;
+import org.example.currencyExchanger.dto.CurrencyExchangeDTO;
+import org.example.currencyExchanger.exception.ErrorResponse;
+import org.example.currencyExchanger.model.Currency;
+import org.example.currencyExchanger.model.ExchangeRates;
 
 import java.math.BigDecimal;
 import java.util.List;

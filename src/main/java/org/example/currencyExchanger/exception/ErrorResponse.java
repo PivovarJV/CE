@@ -1,4 +1,4 @@
-package org.example.currencyexchanger.exception;
+package org.example.currencyExchanger.exception;
 
 import lombok.AllArgsConstructor;
 

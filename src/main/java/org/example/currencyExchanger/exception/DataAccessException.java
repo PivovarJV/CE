@@ -1,4 +1,4 @@
-package org.example.currencyexchanger.exception;
+package org.example.currencyExchanger.exception;
 
 public class DataAccessException extends RuntimeException {
     public DataAccessException() {

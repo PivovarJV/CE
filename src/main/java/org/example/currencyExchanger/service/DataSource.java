@@ -1,4 +1,4 @@
-package org.example.currencyexchanger.service;
+package org.example.currencyExchanger.service;
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;

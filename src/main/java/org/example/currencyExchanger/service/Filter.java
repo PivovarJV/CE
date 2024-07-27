@@ -1,4 +1,4 @@
-package org.example.currencyexchanger.service;
+package org.example.currencyExchanger.service;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;

@@ -1,10 +1,10 @@
-package org.example.currencyexchanger.service;
+package org.example.currencyExchanger.service;
 
 import jakarta.servlet.http.HttpServletRequest;
-import org.example.currencyexchanger.dto.CurrencyExchangeDTO;
-import org.example.currencyexchanger.exception.CurrencyExchangeException;
-import org.example.currencyexchanger.exception.CurrencyNotFoundException;
-import org.example.currencyexchanger.model.Currency;
+import org.example.currencyExchanger.dto.CurrencyExchangeDTO;
+import org.example.currencyExchanger.exception.CurrencyExchangeException;
+import org.example.currencyExchanger.exception.CurrencyNotFoundException;
+import org.example.currencyExchanger.model.Currency;
 
 import java.io.BufferedReader;
 import java.io.IOException;
